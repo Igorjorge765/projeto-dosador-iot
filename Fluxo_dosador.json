@@ -1,0 +1,54 @@
+[
+    {
+        "id": "eac7c2e39b654b68",
+        "type": "mqtt in",
+        "z": "f6f2187d.f17ca8",
+        "name": "",
+        "topic": "dosador/dados",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "d54c2d96ca1e8663",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 160,
+        "y": 100,
+        "wires": [
+            [
+                "4e9cd01f3c473fa8"
+            ]
+        ]
+    },
+    {
+        "id": "d54c2d96ca1e8663",
+        "type": "mqtt-broker",
+        "name": "entrada de dados",
+        "broker": "192.168.68.105",
+        "port": 1883,
+        "clientid": "",
+        "autoConnect": true,
+        "usetls": false,
+        "protocolVersion": 4,
+        "keepalive": 60,
+        "cleansession": true,
+        "autoUnsubscribe": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthRetain": "false",
+        "birthPayload": "",
+        "birthMsg": {},
+        "closeTopic": "",
+        "closeQos": "0",
+        "closeRetain": "false",
+        "closePayload": "",
+        "closeMsg": {},
+        "willTopic": "",
+        "willQos": "0",
+        "willRetain": "false",
+        "willPayload": "",
+        "willMsg": {},
+        "userProps": "",
+        "sessionExpiry": ""
+    }
+]

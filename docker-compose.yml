@@ -1,0 +1,70 @@
+version: '3.8'
+
+services:
+  # --- BANCO DE DADOS (POSTGRES) ---
+  postgres:
+    image: postgres:latest
+    container_name: meu_postgres
+    restart: always
+    environment:
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: senha123
+      POSTGRES_DB: project_iot
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql
+
+  # --- NODE-RED ---
+  node-red:
+    image: nodered/node-red:latest
+    container_name: meu_nodered
+    restart: always
+    ports:
+      - "1880:1880"
+    volumes:
+      - nodered_data:/data
+    depends_on:
+      - postgres
+      - mosquitto
+
+  # --- GRAFANA ---
+  grafana:
+    image: grafana/grafana:latest
+    container_name: meu_grafana
+    restart: always
+    ports:
+      - "3000:3000"
+    volumes:
+      - grafana_data:/var/lib/grafana
+    depends_on:
+      - postgres
+
+  # --- GERENCIADOR DO BANCO (PGADMIN) ---
+  pgadmin:
+    image: dpage/pgadmin4:latest
+    container_name: meu_pgadmin
+    restart: always
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@admin.com
+      PGADMIN_DEFAULT_PASSWORD: admin
+    ports:
+      - "8080:80"
+    depends_on:
+      - postgres
+
+  # --- BROKER MQTT (MOSQUITTO) ---
+  mosquitto:
+    image: eclipse-mosquitto:latest
+    container_name: meu_mosquitto
+    ports:
+      - "1883:1883"   # Porta padrão do MQTT para o ESP32 se conectar
+      - "9001:9001"   # Porta para WebSockets (caso use no futuro)
+    volumes:
+      - ./mosquitto.conf:/mosquitto/config/mosquitto.conf
+    restart: always
+
+volumes:
+  postgres_data:
+  nodered_data:
+  grafana_data:
