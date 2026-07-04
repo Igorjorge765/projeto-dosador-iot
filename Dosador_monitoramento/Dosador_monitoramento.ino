@@ -10,7 +10,7 @@
 BluetoothSerial SerialBT;
 
 // --- CONFIGURAÇÃO DO MQTT ---
-const char* mqtt_server = "192.168.68.105"; 
+const char* mqtt_server = "192.168.68.105"; //mude de acordo com seu ip e faça a mesma coisa no fluxo do node-red
 const int mqtt_port = 1883;
 const char* topico_publicar = "dosador/dados";
 
